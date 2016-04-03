@@ -1,0 +1,777 @@
+%\documentclass[8pt, handout]{beamer}
+%\usepackage{pgfpages} 								%Для распечатки
+%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=10mm]
+
+\documentclass[8pt]{beamer}
+
+\usepackage[english,russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{mflogo}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{euscript}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{transparent}
+
+
+
+\beamertemplatenavigationsymbolsempty
+
+\usetheme{EastLansing}
+\setbeamercovered{transparent}
+
+
+\title[Предел и непрерывность функции]{Математический анализ\\ Тема 2: Предел и непрерывность функции}
+\author[Выборный Е. В.]{Выборный Евгений Викторович\\ email: evybornyi@hse.ru}
+\date{Москва 2015} 
+
+
+\makeatletter
+\setbeamertemplate{footline}{
+    \leavevmode%
+    \hbox{%
+    \begin{beamercolorbox}[wd=.25\paperwidth, ht=2.5ex, dp=1ex, center]{author in head/foot}%
+        \usebeamerfont{author in head/foot}%
+        \insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1ex,center]{title in head/foot}%
+        \usebeamerfont{title in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.5ex,dp=1ex,right]{date in head/foot}%
+        \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+        \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}}%
+    \vskip0pt%
+}
+\makeatother
+
+\makeatletter
+\setbeamertemplate{title page}
+{
+\centering
+ \usebeamerfont{author}\insertauthor
+ \vfill
+ \begin{beamercolorbox}[rounded=true,shadow=true,sep=8pt,center]{title}
+  \usebeamerfont{title}\inserttitle
+ \end{beamercolorbox}
+\vfill
+\centering
+\insertdate\par
+ \vskip0.2em
+}
+\makeatother
+
+\begin{document}
+%\parindent=1.5em %красная строка
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Точки сгущения}
+Пусть $\EuScript{X}$ --- некоторое множество действительных чисел.
+$$\EuScript{X}\subset \mathbb{R}$$
+\vskip-1em
+\begin{block}{Определение}
+Точка $x$ является {\bf предельной точкой} (точкой сгущения) множества $\EuScript{X}$, если в любой проколотой окрестности точки $x$ есть точки из множества $\EuScript{X}$.
+\end{block}
+Данное определение естественным образом обобщается на случай, когда $x$ --- это один из символов: $+\infty$, $-\infty$ или $\infty$.
+\begin{block}{Свойства}
+\begin{enumerate}
+\item Предельная точка может как принадлежать, так и не принадлежать множеству. Пример: $x=1$ --- предельная точка для отрезка $[0,2]$ и для интервала $(0,1)$.
+\item В любой окрестности предельной точки содержится бесконечно много точек множества~$\EuScript{X}$.
+\item У конечного множества нет предельных точек.
+\item Предельные точки множества всех значений последовательности являются ее частичными пределами. Обратное верно не всегда.
+\end{enumerate}
+\end{block}
+Докажите эти свойства!
+\end{frame}
+
+\begin{frame}{Определение предела функции}
+Пусть $f:\ \EuScript{X}\to \mathbb{R}$ --- функция, заданная на множестве $\EuScript{X}\subset\mathbb{R}$. Пусть $x_0$ --- предельная точка (конечная или бесконечная) множества $\EuScript{X}$. Рассмотрим поведение функции $f$ вблизи~$x_0$.
+
+\begin{block}{Определение предела (на языке окрестностей)}
+Говорят, что число $f_0$ (или символы $\pm\infty$, $\infty$) является {\bf пределом функции} $f=f(x)$ при $x\to x_0$ ($x\in\EuScript{X}$), если для любой окрестности $V$ точки $f_0$ найдется окрестность $U$ точки $x_0$ такая, что 
+$$\forall x\in U\cap\EuScript{X},\ x\ne x_0 \ \Rightarrow\ f(x)\in V.$$
+В этом случае пишут:
+$$\lim_{x\to x_0} f(x) = f_0 \quad\text{ или }\quad  f(x)\to f_0\ \text{при } x\to x_0.$$
+\end{block}
+Перепишем данное определение на ``языке $\varepsilon-\delta$'' в случае конечного предела $f_0$ и конечной точки $x_0$.
+
+\begin{block}{Определение предела (на ``языке $\varepsilon-\delta$'')}
+Говорят, что число $f_0$ является {\bf пределом функции} $f=f(x)$ при $x\to x_0$ ($x\in\EuScript{X}$), если 
+$$\forall \varepsilon>0 \ \exists \delta>0:\ \forall x\in\EuScript{X}\quad |f(x) - f_0|<\varepsilon \text{ при } 0<|x-x_0|<\delta.$$
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Определение предела функции}
+
+На ``языке $\varepsilon-\delta$'' можно аналогично сформулировать определения бесконечных пределов ($f_0=\infty$ или $\pm\infty$), а также пределов на бесконечности ($x_0=\infty$ или $\pm\infty$).
+
+\begin{block}{Упражнения}
+\begin{enumerate}
+\item Выпишете все эти определения и отрицания к ним. Приведите примеры соответствующих функций. Покажите эквивалентность определений на ``языке $\varepsilon-\delta$'' и исходного определения предела.
+\item Докажите, что определение предела функции $a(n): \mathbb{N}\to\mathbb{R}$ при $n\to +\infty$ ($n\in\mathbb{N}$) полностью совпадает с определением предела последовательности $a_n = a(n)$.
+\end{enumerate}
+\end{block}
+\vskip-0.5em
+\pause
+\begin{block}{Примеры}
+\begin{enumerate}
+\item Пусть $f(x) \to +\infty$ при $x\to -\infty$, и функция $f$ определена на всей оси. По определению:
+$$\lim_{x\to-\infty}f(x) = +\infty 
+\quad \Leftrightarrow \quad
+\forall \EuScript{E}>0 \ \exists \Delta>0:\ \forall x<-\Delta \quad f(x)>\EuScript{E}.$$
+В качестве примера можно привести $f(x)=-x$.
+\item Несложно видеть, что $\displaystyle\lim_{x\to0}1/x=\infty$.
+Действительно:
+$$\forall \EuScript{E}>0 \ \exists \delta=1/\EuScript{E}:\ |1/x| >\EuScript{E}  \text{ при } 0<|x|<\delta.$$
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Левый и правый предел функции}
+Предположим, что точка $x_0$ является точкой сгущения для множества точек из области определения $\EuScript{X}$ функции $f$, которые строго больше $x_0$. Тогда, определяя предел, можно считать, что $x$ стремится к $x_0$ приближаясь к точке $x_0$ только справа ($x>x_0$).
+
+\begin{block}{Определение (Правый и левый предел)}
+Говорят, что число $f_0$ (или символы $\pm\infty$, $\infty$) является {\bf правым пределом функции} $f=f(x)$ при $x\to x_0$ ($x\in\EuScript{X}$), если для любой окрестности $V$ точки $f_0$ найдется окрестность $U$ точки $x_0$ такая, что 
+$$\forall x\in U\cap\EuScript{X},\ x > x_0\quad \Rightarrow \quad f(x)\in V.$$
+В этом случае пишут:
+$$\lim_{x\to x_0+0} f(x) = f_0 \quad\text{ или }\quad  f(x)\to f_0\ \text{при } x\to x_0+0.$$
+На языке $\varepsilon-\delta$ (в случае конечного $f_0$) получаем:
+$$\forall \varepsilon>0 \ \exists \delta>0:\quad x_0<x<x_0+\varepsilon\ \Rightarrow\ |f(x)-f_0|<\varepsilon.$$
+\end{block}
+Аналогично определяется и левый предел, при этом пишут $x\to x_0 - 0$ или $x\nearrow x_0$.
+\end{frame}
+
+\begin{frame}{Примеры вычисления пределов по определению}
+\begin{enumerate}
+\item  $\displaystyle \lim_{x\to4}\sqrt{x} = 2$.
+Доказательство. Если $\varepsilon<2$, то
+$$|\sqrt{x} - 2| < \varepsilon \quad\Leftrightarrow\quad
+2 - \varepsilon < \sqrt{x} < 2+ \varepsilon \quad\Leftrightarrow\quad
+4-4\varepsilon+\varepsilon^2<x<4+4\varepsilon+\varepsilon^2 $$
+$$\quad\Leftrightarrow\quad
+-4\varepsilon+\varepsilon^2<x-4<4\varepsilon+\varepsilon^2.$$
+Следовательно, выбирая $\delta = 4\varepsilon - \varepsilon^2$, получаем, что
+$$|x-4|<\delta \quad\Rightarrow\quad
+-4\varepsilon+\varepsilon^2 < x - 4 < 4\varepsilon-\varepsilon^2 <
+ 4\varepsilon +\varepsilon^2 \quad\Rightarrow\quad
+|\sqrt{x} - 2| < \varepsilon,$$
+что и требовалось доказать. Для случая $\varepsilon\ge 2$ можно просто взять $\delta=1$.
+
+\item $\displaystyle \lim_{x\to+0}\arctg{\frac{1}{x}} = \frac{\pi}{2}$. Доказательство. Если $\varepsilon<\pi/2$, то
+$$| \arctg(1/x) - \pi/2 |<\varepsilon \quad\Leftrightarrow\quad
+\pi/2-\varepsilon<\arctg(1/x)<\pi/2+\varepsilon \quad\Leftrightarrow\quad
+\arctg(1/x)>\pi/2-\varepsilon$$
+$$ \quad\Leftrightarrow\quad
+1/x>\tg(\pi/2 - \varepsilon)  \quad\Leftrightarrow\quad
+0<x<\left( \tg(\pi/2 - \varepsilon) \right)^{-1}.$$
+Следовательно, если выбирать $\delta=1/ \tg(\pi/2 - \varepsilon)$, то
+$$0<x<\delta  \quad\Rightarrow\quad | \arctg(1/x) - \pi/2 |<\varepsilon.$$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Свойство левого и правого предела функции}
+
+\begin{block}{Утверждение}
+Пусть функция $f$ определена в некоторой проколотой окрестности точки $x_0$. Предел функции $f=f(x)$ при $x\to x_0$ существует и равен $f_0$ тогда и только тогда, когда существует как левый, так и правый предел $f(x)$ при $x\to x_0$, и они оба равны $f_0$.
+$$f_0=\lim_{x\to x_0} f(x) \quad\Leftrightarrow\quad
+f_0=\lim_{x\to x_0+0} f(x)=\lim_{x\to x_0-0} f(x).$$
+\end{block}
+\vskip-1em
+\begin{block}{Доказательство}
+{\bf Необходимость} ($\Rightarrow$). Имеем:
+$$f_0=\lim_{x\to x_0} f(x) \quad \Leftrightarrow \qquad \forall \varepsilon>0 \ \exists \delta>0: \ 0<|x-x_0|<\delta \ \Rightarrow\ f(x)\in O_\varepsilon(f_0).$$
+Поскольку из $x_0-\delta<x<x_0$ следует, что $0<|x-x_0|<\delta$, получаем, что предел слева существует и равен $f_0$. Аналогично для предела справа.
+
+{\bf Достаточность} ($\Leftarrow$). Имеем:
+$$f_0=\lim_{x\to x_0+0} f(x) \quad \Leftrightarrow \qquad \forall \varepsilon>0 \ \exists \delta_1>0: \ x_0<x<x_0+\delta_1 \ \Rightarrow\ f(x)\in O_\varepsilon(f_0),$$
+$$f_0=\lim_{x\to x_0-0} f(x) \quad \Leftrightarrow \qquad \forall \varepsilon>0 \ \exists \delta_2>0: \ x_0-\delta_2<x<x_0 \ \Rightarrow\ f(x)\in O_\varepsilon(f_0).$$
+Выбирая $\delta=\min(\delta_1,\delta_2)$, получаем то, что $f(x)\in O_\varepsilon(f_0)$ при $0<|x-x_0|<\delta$.
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Определение предела по Гейне}
+
+Пусть $f(x)$ --- функция, заданная на множестве $\EuScript{X}$, а $z$ --- предельная точка (конечная или бесконечная) множества $\EuScript{X}$. 
+
+\begin{block}{Теорема}
+Предел функции $f(x)$ при $x\to z$ существует и равен $w$ тогда и только тогда, когда  существует и равен $w$ предел {\bf последовательности} значений функции $f(x_n)$ на произвольной последовательности $x_n$ такой, что  $x_n\in \EuScript{X}$, $x_n\ne z$ при $\forall n\in\mathbb{N}$ и~$x_n\to z$ при~$n\to+\infty$.
+$$
+\lim_{x\to z} f(x) = w 
+\quad\Leftrightarrow\quad
+\forall\ \{x_n\}_{n=1}^\infty:\ x_n\in\EuScript{X},\ x_n\ne z,\ x_n\to z \quad \lim_{n\to\infty} f(x_n)=w.$$
+\end{block}
+На основании этой теоремы можно предложить другое эквивалентное определение предела.
+\begin{block}{Определение предела функции по Гейне}
+Говорят, что предел функции $f(x)$ при $x\to z$ существует и равен $w$, если для любой последовательности $x_n$ такой, что $x_n\in \EuScript{X}$, $x_n\ne z$ при $\forall n\in\mathbb{N}$ и $x_n\to z$ при $n\to\infty$, предел последовательности значений функции $f(x_n)$ существует и равен $w$.
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+\begin{block}{Доказательство эквивалентности определений по Коши и по Гейне}
+$$
+\lim_{x\to z} f(x) = w 
+\quad\Leftrightarrow\quad
+\forall\ \{x_n\}_{n=1}^\infty:\ x_n\in\EuScript{X},\ x_n\ne z,\ x_n\to z \quad \lim_{n\to\infty} f(x_n)=w.$$
+\end{block}
+\begin{overprint}
+\onslide<1>
+
+{\bf Необходимость} ($\Rightarrow$). По определению предела:
+$$
+\lim_{x\to z} f(x) = w \quad\Leftrightarrow\quad
+\forall \varepsilon>0\ \exists\delta>0:\ f(x)\in O_\varepsilon(w) \ \text{при}\ \forall x\in\dot O_\delta(z),\ x\in\EuScript{X}.$$
+Пусть $x_n$ --- произвольная последовательность точек из $\EuScript{X}$ такая, что $x_n\to z$ при $n\to+\infty$ и $x_n\ne z$. Тогда по определению предела последовательности:
+$$x_n\to z \quad\Rightarrow\quad \exists N>0:\ \forall n\ge N\quad x_n\in O_\delta(z).$$
+Поскольку $x_n\ne z$, то $x_n\in \dot O_\delta(z)$ при $n\ge N$. Следовательно,
+$$\forall \varepsilon>0\ \exists N>0:\ f(x_n)\in O_\varepsilon(w)\ \ \forall n\ge N,$$
+то есть последовательность $f(x_n)$ стремится к $w$.
+
+\onslide<2>
+
+{\bf Достаточность} ($\Leftarrow$). Предположим обратное: предел по Гейне существует и равен $w$, а по Коши --- нет. Тогда по определению предела (по Коши):
+$$
+\lim_{x\to z} f(x) \ne w \quad\Leftrightarrow\quad
+\exists \varepsilon_0>0:\ \forall \delta>0\ \exists x=x(\delta)\in\dot O_\delta(z),\ x\in\EuScript{X}:\quad f(x)\notin O_\varepsilon(w).
+$$
+Выбирая последовательность значений $\delta=\delta_n=1/n$ получаем последовательность $x_n$ такую, что $f(x_n)\notin O_\varepsilon(w)$ при $\forall n\in \mathbb{N}$ и $x_n\to z$ при $n\to+\infty$. Следовательно, $\lim\limits_{n\to\infty}f(x_n)\ne w$, что противоречит определению предела по Гейне.
+\begin{block}{Пример}
+Рассмотрим функцию $f(x)=\sin(1/x)$ в окрестности точки $x=0$. Пусть 
+$$
+x_n = \left( \frac{\pi}{2}+2 \pi n\right)^{-1}, \quad
+y_n =  \left( - \frac{\pi}{2}+2 \pi n\right)^{-1}.
+$$
+Очевидно, что $x_n\to 0$ и $y_n\to 0$ при $n\to\infty$, но $f(x_n)=1$, а $f(y_n) = -1$ при любых $n\in\mathbb{N}$. Следовательно, предел $\lim\limits_{x\to0}f(x)$ не существует!
+\end{block}
+\end{overprint}
+\end{frame}
+
+\begin{frame}{Свойства предела функции}
+
+Свойства пределов функций аналогичны свойствам пределов последовательностей.
+\vskip1em
+Пусть $f(x)$, $g(x)$ определены в некоторой окрестности $x_0$ и $f(x)\to f_0$, $g(x)\to g_0$ при $x\to x_0$.
+\begin{enumerate}
+\item {\bf Единственность.} Предел функции определен однозначно.
+\item {\bf Арифметические свойства пределов}
+\begin{enumerate}
+\item $\displaystyle \exists\ \lim_{x\to x_0} (a f(x) + b g(x)) = a f_0 + b g_0$,
+\item $\displaystyle \exists\ \lim_{x\to x_0} f(x) g(x) = f_0 g_0$,
+\item Если $g_0\ne 0$, то $\displaystyle \exists\ \lim_{x\to x_0} f(x)/g(x) = f_0/g_0$.
+\end{enumerate}
+\item {\bf Переход к пределу в неравенствах.} Если $f(x)\le g(x)$ при $x$ из некоторой окрестности~$x_0$, то $f_0\le g_0$.
+\item {\bf Лемма ``о двух милиционерах''.} Пусть $h(x)$ --- функция, определенная в некоторой окрестности $x_0$, и $f(x)\le h(x) \le g(x)$. Тогда, если $f_0=g_0=A$, то существует предел~$\lim\limits_{x\to x_0} h(x) = A$.
+\item {\bf Сохранение знака.} Если $f_0>0$ (или $f_0<0$), то $f(x)>0$ (соответственно $f(x)<0$) в некоторой проколотой окрестности $x_0$.
+\end{enumerate}
+\begin{block}{Упражнения}
+Доказать эти свойства, используя как определение предела по Коши, так и определение по Гейне.
+\end{block}
+\end{frame}
+
+\begin{frame}{Замена переменных в пределе}
+
+Пусть функция $g(x)$ определена в некоторой проколотой окрестности $x_0$, а функция $f(y)$ определена в некоторой проколотой окрестности $y_0$.
+
+\begin{block}{Теорема (Замена переменных в пределе)}
+Пусть существуют пределы:
+$$\lim_{x\to x_0} g(x)=y_0,\qquad \lim_{y\to a} f(y) = z,$$
+и $g(x)\ne y_0$ для $x$, достаточно близких к $x_0$. Тогда
+$$\exists\ \lim_{x\to x_0} f(g(x)) = z.$$
+\end{block}
+В качестве $x_0$, $y_0$ и $z$ могут фигурировать символы $\pm\infty$ и $\infty$.
+\begin{block}{Доказательство}
+Доказательство проведем, используя определение предела по Гейне:
+$$
+\forall \{x_n\}:\ x_n\ne x_0,\ x_n\to x_0 \quad\Rightarrow\quad
+g(x_n)\to y_0,\ g(x_n)\ne y_0 \quad\Rightarrow\quad f(g(x_n))\to z, \ (n\to+\infty).
+$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Непрерывность функции}
+\begin{block}{Определение}
+Функция $f(x)$, определенная в некоторой окрестности точки $x_0$, называется {\bf непрерывной} в точке $x_0$, если существует предел $f(x)$ при $x\to x_0$ и он равен значению функции $f$ в этой точке:
+$$\exists\lim_{x\to x_0} f(x)=f(x_0).$$
+Функция $f(x)$ называется {\bf непрерывной на интервале}, если она непрерывна в каждой его точке.
+\vskip1em
+Функция $f(x)$ называется {\bf непрерывной на отрезке} $[a,b]$, если она непрерывна на интервале $(a,b)$ и 
+$$\exists\ \lim_{x\to a+0} f(x) = f(a),\qquad \exists\ \lim_{x\to b - 0} f(x) = f(b).$$
+\end{block}
+\vskip-1em
+
+\begin{block}{Замечание}
+Если функция $f(y)$ непрерывна в точке $y_0$, и $g(x)\to y_0$ при $x\to x_0$ то 
+$$\lim_{x\to x_0} f(g(x)) = f\left( \lim_{x\to x_0} g(x)\right) = f(y_0).$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Пример непрерывной функции}
+
+Функция $f(x)=\sin(x)$ --- непрерывна на всей оси. 
+\vskip0.7em
+Убедимся в непрерывности синуса в произвольной точке $x_0$. Необходимо проверить, что
+$$\lim_{x\to x_0}\sin(x) = \sin(x_0).$$
+По определению предела:
+$$\lim_{x\to x_0}\sin(x) = \sin(x_0) \quad \Leftrightarrow \quad
+\forall \varepsilon>0\  \exists \delta>0:\ |\sin(x) - \sin(x_0)|<\varepsilon\ \text{при}\ |x-x_0|<\delta.
+$$
+Пользуясь формулой для разности синусов и неравенством $|\sin(x)|<|x|$, получаем, что
+$$
+ |\sin(x) - \sin(x_0)| = 2\left| \sin\left(\frac{x-x_0}{2}\right) \cos\left(\frac{x+x_0}{2}\right) \right| \le 2\left| \sin\left(\frac{x-x_0}{2}\right) \right|\le |x-x_0|.
+ $$
+ Выбирая $\delta=\varepsilon$, получаем, что
+ $$\forall \varepsilon>0\quad |\sin(x)-\sin(x_0)|<\varepsilon\ \text{при}\ |x-x_0|<\delta.$$
+ Что и требовалось показать.
+\begin{block}{Упражнение}
+Проведите аналогичное доказательство для $cos(x)$.
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Первый замечательный предел}
+\begin{block}{Лемма}
+$$\displaystyle \cos(x)< \frac{\sin(x)}{x} < 1,\quad \text{при}\ 0<|x|<\frac{\pi}{2}.$$
+\end{block}
+\vskip-1.5em
+\begin{block}{Доказательство}
+Поскольку $\sin(x)/x$ и $\cos(x)$ --- четные функции, то неравенство необходимо проверить только для $0<x<\pi/2$.
+\begin{columns}
+\begin{column}{0.4\textwidth}
+	\begin{center}
+	\includegraphics[scale=0.5]{fig1.pdf}
+	\end{center}
+\end{column}
+\begin{column}{0.6\textwidth}
+Сравним площадь  треугольника $\Delta OAB$, сектора $ OAB$ и треугольника $\Delta OAC$:
+$$S_{\Delta OAB} = \frac{1}{2} |BD| |OA| = \frac{1}{2} \sin(x).$$
+$$S_{\text{cектор}(OAB)} = \frac{1}{2}r^2 x = \frac{x}{2}.$$
+$$S_{\Delta OAC} = \frac{1}{2} |AC| |OA| = \frac{1}{2} \tg(x).$$
+\end{column}
+\end{columns}
+\vskip0.5em
+$$S_{\Delta OAB} < S_{\text{cектор}(OAB)}<S_{\Delta OAC}
+\quad\Rightarrow\quad
+\sin(x)<x<\frac{\sin(x)}{\cos(x)}
+\quad\Rightarrow\quad
+ \cos(x)< \frac{\sin(x)}{x} < 1
+.$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Первый замечательный предел}
+\begin{block}{Утверждение (Первый замечательный предел)}
+$$\lim_{x\to0}\frac{\sin(x)}{x} = 1.$$
+\end{block}
+\vskip-1.5em
+\begin{block}{Доказательство}
+Доказательство основано на неравенстве: 
+$$\displaystyle\qquad \cos(x)< \frac{\sin(x)}{x} < 1,\quad \text{при}\ 0<|x|<\frac{\pi}{2}.$$
+Поскольку $\cos(x)$ --- непрерывная функция:
+$$\lim_{x\to 0} \cos(x) = \cos(0) =1.$$
+Следовательно, достаточно перейти к пределу при $x\to0$ в неравенстве, используя лемму ``о~двух милиционерах''.
+\end{block}
+\end{frame}
+
+\begin{frame}{Первый замечательный предел}
+\begin{block}{Замечание}
+Функция $\frac{\sin(x)}{x}$ не является непрерывной при $x=0$, поскольку не определена в этой точке, но если мы рассмотрим функцию
+$$
+f(x)=\left\{\begin{array}{cl}
+ \displaystyle \frac{\sin(x)}{x} & x\ne0;\\
+ \displaystyle 1\phantom{\frac11} & x=0,
+\end{array}\right.
+$$
+то $f(x)$ будет непрерывна на всей оси.
+\end{block}
+\begin{center}
+\includegraphics[scale=1]{fig2.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}{Примеры вычисления пределов}
+Несколько примеров на вычисление пределов:
+\vskip1em
+\begin{enumerate}
+\item $\displaystyle
+\lim_{x\to 0} \frac{\tg(x)}{x} =
+\lim_{x\to 0} \frac{\sin(x)}{x}\frac{1}{\cos(x)}=
+\lim_{x\to 0} \frac{\sin(x)}{x}\ \lim_{x\to0}\frac{1}{\cos(x)}=1
+,$
+\vskip1em
+здесь мы воспользовались арифметическими свойствами предела.
+\vskip1em
+\item $\displaystyle
+\lim_{x\to 0} \frac{\arcsin(x)}{x} =
+\left\{ x=\sin(z),\ z=\arcsin(x),\ x\to0\ \Rightarrow z\to0 \right\}=
+\lim_{z\to 0} \frac{z}{\sin(z)}=1,
+$
+\vskip1em
+здесь мы воспользовались арифметическими свойствами предела, теоремой о замене переменных в пределе и тем, что
+$$\lim_{x\to0} \arcsin(x)=0.$$
+
+\item $\displaystyle
+\lim_{x\to 0} \frac{1-\cos(x)}{x^2} =
+\left\{ 1-\cos(x) =2\sin^2\left(\frac{x}{2}\right) \right\}=
+2\lim_{x\to 0} \frac{\sin^2(x/2)}{x^2}=\left\{ x/2 = z,\ x=2z \right\} =
+\frac{2}{4}\left(\lim_{z\to0} \frac{\sin(z)}{z}\right)^2=\frac{1}{2}
+.$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Свойства непрерывных функций}
+
+Локальные свойства непрерывных функций следуют из соответствующих свойств пределов.
+\vskip1em
+Пусть $f(x)$ и $g(x)$ определены в некоторой окрестности $x_0$ и непрерывны в точке $x_0$.
+\begin{enumerate}
+\item {\bf Линейная комбинация} $h(x) = a\, f(x) + b\, g(x)$ непрерывных функций непрерывна.
+\item {\bf Произведение} $h(x) = f(x) g(x)$ непрерывных функций непрерывно.
+\item Если $g(x_0)\ne0$, то {\bf отношение} непрерывных функций $h(x)=f(x)/g(x)$ непрерывно.
+\item {\bf Сохранение знака.} Если $f(x_0)>0$ (или $f(x_0)<0$), то $f(x)>0$ (соответственно, $f(x)<0$) в некоторой окрестности $x_0$.
+\item {\bf Сложная функция} $h(x) = f(g(x))$, составленная из двух непрерывных функций, непрерывна. Здесь $f(x)$ должна быть определена и непрерывна не в окрестности точки $x_0$, а в точке $g(x_0)$.
+\end{enumerate}
+\begin{block}{Упражнения}
+Доказать эти свойства, используя соответствующие свойства пределов. Показать, что если условия, наложенные на $f$ и $g$,  не справедливы, то свойства могут и не выполняться. Приведите различные примеры.
+\end{block}
+\end{frame}
+
+\begin{frame}{Многочлены и рациональные функции}
+\begin{block}{Определение}
+Функцию $P(x)$ вида:
+$$P(x) = a_0 x^n + a_1 x^{n-1} + \cdots + a_{n-1} x + a_n,$$
+где $n\in\mathbb{N}$, $a_i\in\mathbb{R}$ и $a_0\ne 0$, называют {\bf многочленом} (или полиномом) степени $n$.
+\end{block}
+\begin{block}{Утверждение}
+Многочлены непрерывны на всей оси.
+\end{block}
+Данное утверждение следует непосредственно из свойств непрерывных функций и из непрерывности постоянной функции $f(x) = 1$ и линейной функции $g(x)=x$.
+\begin{block}{Определение}
+Функцию $R(x)$ вида:
+$$R(x)= \frac{P_1(x)}{P_2(x)}$$
+где $P_1(x)$ и $P_2(x)$ --- полиномы, называют рациональной функцией от $x$.
+\end{block}
+\begin{block}{Утверждение}
+Рациональные функции непрерывны на всей своей области определения.
+\end{block}
+\end{frame}
+
+\begin{frame}{Классификация разрывов функций}
+\begin{block}{Критерий непрерывности}
+Функция $f$, определенная в окрестности точки $x_0$, непрерывна в точке $x_0$ тогда и только тогда, когда существуют как левый, так и правый пределы $f$ в этой точке, и они равны $f(x_0)$:
+$$f(x_0+0)=f(x_0-0)=f(x_0).\eqno(*)$$
+\end{block}
+Следовательно, возникает следующая классификация точек разрыва функций:
+\begin{enumerate}
+\item Говорят, что $x_0$ --- точка разрыва {\bf 1-го рода}, если оба односторонних предела существуют и конечны, но не выполнено одно из равенств в $(*)$.
+\item Говорят, что $x_0$ --- точка разрыва {\bf 2-го рода}, если один из односторонних пределов не существует или бесконечен.
+\end{enumerate}
+Иногда отдельно выделяют случай, где правый и левый предел совпадают:
+$$f(x_0+0)=f(x_0-0),$$
+но они не равны $f(x_0)$ или $f(x_0)$ не определено. Такие точки называют {\bf устранимыми точками разрыва} функции $f$. Действительно, функция $$\tilde f(x) = \left\{ \begin{array}{cl}f(x)&x\ne x_0;\\ f(x_0+0)& x=x_0,\end{array}\right.$$
+ отличающаяся от $f$ лишь в точке $x_0$, будет непрерывной.
+\end{frame}
+
+\begin{frame}{Бесконечно большие и бесконечно малые функции}
+\begin{block}{Определение}
+Функция $\alpha(x)$, определенная в некоторой окрестности $x_0$, называется {\bf бесконечно малой} при $x\to x_0$, если она стремится к $0$ при $x\to x_0$:
+$$\lim_{x\to x_0} \alpha(x)=0.$$
+\end{block}
+\vskip-1em
+\begin{block}{Определение}
+Функция $A(x)$, определенная в некоторой окрестности $x_0$, называется {\bf бесконечно большой} при $x\to x_0$, если она стремится к $\infty$ при $x\to x_0$:
+$$\lim_{x\to x_0} A(x)=\infty.$$
+\end{block}
+Аналогичные определения используются и в случае других предельных процессов, таких как $x\to \pm\infty$, $x\to \infty$, $x\to x_0 \pm0$ и др.
+
+\end{frame}
+
+\begin{frame}{Бесконечно большие и бесконечно малые функции}
+\begin{block}{Основные свойства}
+\begin{enumerate}
+\item
+Функция $f(x)$ стремится к числу $f_0$ при $x\to x_0$ тогда и только тогда, когда разность $\alpha(x)=f(x) - f_0$ является бесконечно малой функцией.
+\item Сумма, разность, произведение двух бесконечно малых функций --- это бесконечно малая функция.
+\item Произведение бесконечно малой функции на ограниченную функцию --- это бесконечно малая функция.
+\item Если $A(x)$ --- бесконечно большая функция, то $1/A(X)$ --- это бесконечно малая функция.
+\end{enumerate}
+\end{block}
+\begin{block}{Примеры}
+Функции $x$, $x^2$, $\sin(x)$ являются бесконечно малыми при $x\to0$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Бесконечно большие и бесконечно малые функции}
+\begin{block}{Теорема}
+Функция $f(x)$ является непрерывной в точке $x_0$ тогда и только тогда, когда
+любое бесконечно малое приращение аргумента приводит к бесконечно малому приращению функции.
+\end{block}
+\begin{block}{Доказательство}
+Необходимо показать, что
+$$\lim_{x\to x_0} f(x) = f(x_0) \quad \Leftrightarrow \quad \forall\ \alpha(z)\quad
+\text{$|f(x_0+\alpha(z))-f(x_0)|$ --- бесконечна малая,}$$
+где $\alpha(z)$ --- бесконечно малая функция $z$.
+Дальнейшее доказательство полностью аналогично доказательству эквивалентности определений предела по Коши и по Гейне.
+\end{block}
+\begin{block}{Упражнения}
+Проведите полностью данное доказательство, а также доказательства основных свойств бесконечно больших и бесконечно малых. 
+
+Как данная теорема связана с теоремой о непрерывности сложной функции?
+\end{block}
+\end{frame}
+
+\begin{frame}{Асимптотическая эквивалентность}
+\begin{block}{Определение}
+Две функции $f(x)$ и $g(x)$, определенные и не равные $0$ в некоторой проколотой окрестности точки $x_0$, являются {\bf асимптотически эквивалентными}, если
+$$\lim_{x\to x_0} \frac{f(x)}{g(x)} = 1.$$
+Записывают это следующим образом:
+$$f(x)\sim g(x)\quad (x\to x_0).$$
+\end{block}
+\vskip-1em
+\pause
+\begin{block}{Свойства}
+\begin{enumerate}
+\item {\bf Рефлексивность:} $\quad f(x)\sim f(x)$.
+\item {\bf Симметричность:} $\quad f(x)\sim g(x)\quad \Leftrightarrow \quad g(x)\sim f(x)$.
+\item {\bf Транзитивность:} $\quad f(x)\sim g(x),\ g(x)\sim h(x)\quad \Rightarrow \quad f(x)\sim h(x)$.
+\end{enumerate}
+\end{block}
+\begin{block}{Упражнение}
+Докажите данные свойства, исходя из свойств предела функции.
+\end{block}
+\end{frame}
+
+\begin{frame}{Асимптотическая эквивалентность}
+\begin{block}{Лемма 1}
+Пределы эквивалентных функций совпадают:
+$$f(x)\sim g(x),\ f(x)\to A \quad \Rightarrow \quad g(x)\to A$$
+\end{block}
+\vskip-1em
+\begin{block}{Доказательство}
+$$\lim_{x\to x_0} g(x) = \lim_{x\to x_0}\left( f(x)\cdot \frac{g(x)}{f(x)}\right) = \lim_{x\to x_0} f(x) \cdot \lim_{x\to x_0} \frac{g(x)}{f(x)} = A\cdot 1 =A.$$
+\end{block}
+\vskip-1em
+\begin{block}{Лемма 2}
+Произведения и отношения эквивалентных функций --- эквивалентны:
+$$f(x)\sim g(x),\ h(x)\sim r(x) \quad \Rightarrow \quad f(x)h(x)\sim g(x)r(x),\ f(x)/h(x)\sim g(x)/r(x).$$
+\end{block}
+\vskip-1em
+\begin{block}{Доказательство}
+$$\lim_{x\to x_0} \frac{f(x)h(x)}{g(x)r(x)} = 
+\lim_{x\to x_0} \frac{f(x)}{g(x)}\cdot \frac{h(x)}{r(x)} =
+ \lim_{x\to x_0} \frac{f(x)}{g(x)} \cdot \lim_{x\to x_0} \frac{h(x)}{r(x)} = 1\cdot 1 =1,$$
+ $$\lim_{x\to x_0} \frac{f(x)/h(x)}{g(x)/r(x)} = 
+\lim_{x\to x_0} \frac{f(x)}{g(x)}\cdot \frac{r(x)}{h(x)} =
+ \lim_{x\to x_0} \frac{f(x)}{g(x)} \cdot \lim_{x\to x_0} \frac{r(x)}{h(x)} = 1\cdot 1 =1.$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Асимптотическая эквивалентность}
+Из Лемм 1 и 2 следует важная для вычисления пределов теорема.
+\begin{block}{Теорема}
+Предел произведения или отношения двух функций не изменится, если одну из них (или обе) заменить эквивалентными функциями.
+\end{block}
+\begin{block}{Примеры эквивалентных функций}
+\begin{enumerate}
+\item $\sin(x)\sim x$, при $x\to0$;
+\item $\tg(x)\sim x$ при $x\to0$;
+\item $\displaystyle 1-\cos(x)\sim \frac{x^2}{2}$, при $x\to0$;
+\item $x^2+3x+5\sim x^2$, при $x\to+\infty$;
+\item $x^2+3x+5\sim 5$, при $x\to0$;
+\end{enumerate}
+\end{block}
+\begin{block}{Замечание}
+Если пара функций эквивалентна, то это еще не означает, что их разность мала. Например, $x^2+3x+5\sim x^2$ при $x\to+\infty$, но их разность $3x+5$ является бесконечно большой величиной при $x\to+\infty$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Сравнение бесконечно малых}
+\begin{block}{Определение}
+Говорят, что функция $f(x)$ имеет меньший порядок чем $g(x)$ при $x\to x_0$, если
+$$\lim_{x\to x_0}\frac{f(x)}{g(x)} = 0,$$
+при этом пишут:
+$$f(x) = o(g(x)),\quad (x\to x_0).$$
+\end{block}
+Из определения следует, что $f(x)=o(g(x))$ тогда и только тогда, когда $f(x)=\alpha(x) g(x)$, где $\alpha(x)$ --- бесконечно маленькая функция, при $x\to x_0$.
+\vskip1em
+Если $\alpha(x)$ --- бесконечно маленькая функция, то $\alpha(x) = o(1)$, и наоборот.
+\vskip1em
+Символ $o(1)$ и $o(g(x))$ часто используют в формулах, подразумевая, что вместо этого символа в формуле стоит некоторая, вообще говоря неизвестная, функция обладающая соответствующими свойствами.
+\begin{block}{Пример}
+$$\frac{\sin(x)}{x}\sim 1 \quad \Leftrightarrow \quad \frac{\sin(x)}{x} =1+o(1) \quad \Leftrightarrow \quad \sin(x) = x( 1 + o(1)) = x+o(x).$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Показательная функция}
+Функцию $f(x) = a^x$, где $a>1$ --- фиксированное действительное число, называют показательной функцией.
+
+Величина $a^x$ естественным образом определяется для рациональных $x>0$:
+$$a^x = \sqrt[n]{a^m},\quad \text{где } x=\frac{m}{n}\in\mathbb{Q}.$$
+Для иррациональных значений $x$ показательная функция определяется как предел значений $f(x_n)$, где $x_n$ --- рациональные приближения числа $x$ ($x_n\in\mathbb{Q}$: $x_n\to x$, при $n\to+\infty$).
+
+Хорошо известно, что
+$$a^0=1,\quad a^{x+y}=a^x a^y,\quad a^{-1}=\frac{1}{a},\quad a^{x y} = (a^x)^y,\quad (ab)^x = a^x b^x.$$
+
+\begin{block}{Определяющие свойства}
+Функция $f(x)$ является показательной функцией $a^x$ тогда и только тогда, когда:
+\begin{enumerate}
+\item $f(x)$ --- непрерывна на всей оси.
+\item $f(1)=a$
+\item $f(x+y) = f(x)\cdot f(y)$ для любых $x$ и $y$.
+\end{enumerate}
+Ни одно из этих трех условий не является излишним.
+\end{block}
+\end{frame}
+
+\begin{frame}{Примеры вычисления пределов}
+\begin{block}{Пример 1}
+Докажем, что
+$$\lim_{x\to +\infty} a^x = +\infty,  \quad (a>1).$$
+Действительно, для любого $E>0$ достаточно взять $\Delta=\log_a E$. Тогда при $x>\Delta$ будет~$a^x>E$. Следовательно,
+$$\forall E>0\ \exists \Delta>0:\ x>\Delta\ \Rightarrow\ a^x>E.$$
+Аналогично вычисляются следующие пределы:
+$$ \lim_{x\to -\infty} a^x = 0, \qquad (a>1),$$
+$$ \lim_{x\to +\infty} a^x = 0,\quad  \lim_{x\to -\infty} a^x = +\infty, \qquad (0<a<1),$$
+$$ \lim_{x\to +0} \log_a x = -\infty,\quad \lim_{x\to +\infty} \log_a x = +\infty,\qquad (a>1).$$
+\end{block}
+\begin{block}{Упражнение}
+Проведите полностью соответствующие доказательства.
+\end{block}
+\end{frame}
+
+\begin{frame}{Примеры вычисления пределов}
+\begin{block}{Пример 2}
+Докажем, что
+$$\lim_{x\to +\infty} \frac{a^x}{x} = +\infty,  \quad (a>1).$$
+Нам известно, что для $n\in\mathbb{N}$
+$$\lim_{n\to +\infty} \frac{a^n}{n} = +\infty.$$
+Выбирая $n=n(x)$ так, что $n\le x<n+1$, получаем, что
+$$\frac{a^x}{x}\ge \frac{a^{n}}{n+1}=\frac{a^n}{n}\frac{1}{1+1/n}\to +\infty,\quad (x\to+\infty).$$
+Аналогично вычисляются следующие пределы:
+$$\lim_{x\to +\infty} \frac{a^x}{x^k} = +\infty,  \quad (a>1,\ k>0),$$
+$$
+\lim_{x\to +\infty} \frac{\log_a(x)}{x^k} =0,\quad
+ \lim_{x\to +0} x^k \log_a (x) =0,  \qquad (a>1, k>0).$$
+\end{block}
+\vskip-1em
+\begin{block}{Упражнение}
+Проведите полностью соответствующие доказательства.
+\end{block}
+\end{frame}
+
+\begin{frame}{Второй замечательный предел}
+\begin{block}{Теорема (Второй замечательный предел)}
+$$\lim_{x\to \infty} \left(1+\frac{1}{x}\right)^x =
+\lim_{x\to 0} \left(1+x\right)^\frac{1}{x}= e.$$
+\end{block}
+\vskip-1em
+\begin{block}{Доказательство}
+Пусть для начала $x\to+\infty$. Выберем натуральное $n=n(x)$ такое, что $n\le x<n+1$. Следовательно,
+$$\left(1+\frac{1}{n+1}\right)^n< \left(1+\frac{1}{x}\right)^x<\left(1+\frac{1}{n}\right)^{n+1}.$$
+Очевидно, левая и правая часть данного неравенства стремится к $e$ при $x\to+\infty$. 
+
+Теперь рассмотрим случай $x\to-\infty$:
+$$\lim_{x\to -\infty} \left(1+\frac{1}{x}\right)^x =\lim_{t\to +\infty} \left(1-\frac{1}{t}\right)^{-t}=\lim_{t\to +\infty} \left(\frac{t-1}{t}\right)^{-t}=\lim_{t\to +\infty} \left(\frac{t}{t-1}\right)^{t}=$$
+$$
+=\lim_{t\to +\infty} \left(1+\frac{1}{t-1}\right)^{t}=\lim_{t\to +\infty} \left(1+\frac{1}{t-1}\right)^{t-1}\left(1+\frac{1}{t-1}\right)=e\cdot 1=e.$$
+\end{block}
+\end{frame}
+
+\begin{frame}{Второй замечательный предел}
+\begin{block}{Второй замечательный предел}
+$$\lim_{x\to \infty} \left(1+\frac{1}{x}\right)^x =
+\lim_{x\to 0} \left(1+x\right)^\frac{1}{x}= e.$$
+\end{block}
+\vskip-1em
+\begin{block}{Следствия}
+\begin{enumerate}
+\item $\ln(1+x)\sim x$ при $x\to0$.
+Действительно:
+$$\lim_{x\to0}\frac{\ln(1+x)}{x}=\lim_{x\to0} \ln(1+x)^{1/x}=\ln\left(\lim_{x\to0}(1+x)^{1/x}\right)=\ln(e)=1.$$
+\item $e^x-1\sim x$ при $x\to0$. Выполнив замену переменной в пределе, получаем:
+$$\lim_{x\to0}\frac{e^x-1}{x}=\left\{ x=ln(1+t);\ t=e^x-1;\ x\to0\ \Rightarrow\ t\to0 \right\}=\lim_{t\to0}\frac{t}{\ln(1+t)}=1.$$
+\item $(1+x)^\alpha-1\sim \alpha x$ при $x\to0$. Учитывая, что $\alpha \ln(1+x)\to0$, получаем:
+$$
+\lim_{x\to0}\frac{(1+x)^\alpha-1}{\alpha x} = \lim_{x\to0}\frac{e^{\alpha \ln(1+x)}-1}{\alpha x} = \lim_{x\to0}\frac{\alpha \ln(1+x)}{\alpha x} = \lim_{x\to0}\frac{ \ln(1+x)}{ x}=1.
+$$
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Теорема о промежуточном значении}
+\begin{block}{Теорема о нуле непрерывной функции}
+Пусть функция $f(x)$ непрерывна на $[a,b]$ и принимает на концах отрезка значения разных знаков: $f(a) f(b)<0$. 
+Тогда существует точка $c\in(a,b)$, для которой $f(c)=0$.
+\end{block}
+\begin{block}{Доказательство}
+Пусть для определенности $f(a)<0$ и $f(b)>0$. Положим $a_0=a$, $b_0=b$. 
+\vskip0.5em
+Рассмотрим $c_0$ --- середину отрезка $[a_0,b_0]$: $c_0=(a_0+b_0)/2$. 
+\begin{enumerate}
+\item Если $f(c_0)=0$, то положим $c=c_0$.
+\item Если $f(c_0)>0$, то положим $a_1=a_0$, $b_1=c_0$.
+\item Если $f(c_0)<0$, то положим $a_1=c_0$, $b_1=b_0$.
+\end{enumerate}
+Повторяя данную операцию для отрезка $[a_1,b_1]$ и далее при необходимости, получаем последовательности $\{a_n\}$ и $\{b_n\}$. Если точку $c$ удается найти на конечном шаге $n$, то теорема доказана.
+\vskip0.5em
+Предположим, что найти точку $c$ не удалось. По построению: $a_n$ не убывает, $b_n$ не возрастает и $b_n - a_n = (b-a)/2^n$. Следовательно, $a_n$ и $b_n$ сходятся к общему пределу $c\in(a,b)$. 
+Остается показать, что $f(c)=0$. Учитывая непрерывность $f$, получаем, что $f(a_n)\to f(c)$ и $f(b_n)\to f(c)$ при $n\to+\infty$. Следовательно,
+$$f(a_n)<0,\ f(b_n)>0 \quad \Rightarrow\quad f(c)\le 0,\ f(c)\ge 0 \quad \Rightarrow\quad f(c)=0.$$
+
+\end{block}
+\end{frame}
+
+\begin{frame}{Теорема о промежуточном значении}
+\begin{block}{Теорема о промежуточном значении}
+Пусть функция $f(x)$ непрерывна на отрезке $[a,b]$ и $f(a)\ne f(b)$. 
+Тогда любое число $d$ из интервала с концами $f(a)$ и $f(b)$ является значением функции $f(x)$ в некоторой точке $c\in(a,b)$: $f(c)=d$.
+\end{block}
+\begin{block}{Доказательство}
+Достаточно применить теорему о нуле непрерывной функции к функции $f_1(x)=f(x)-d$.
+\end{block}
+\begin{block}{Замечание}
+Условие непрерывности функции $f(x)$ существенно для данных теорем. Рассмотрите пример $f(x)=\mathrm{sign}(x)$ на $[-1,1]$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Обратная функция}
+
+\begin{block}{Теорема об обратной функции}
+Пусть функция $y=f(x)$ строго монотонна и непрерывна на отрезке $[a,b]$. Тогда существует обратная к $y=f(x)$ функция $x=g(y)$, и она строго монотонна и непрерывна на отрезке с концами в точках $f(a)$ и $f(b)$.
+\end{block}
+\begin{block}{Доказательство}
+Пусть для определенности $f(x)$ строго возрастает, следовательно, $f(b)>f(a)$.
+\begin{enumerate}
+\item {\bf Существование}. Уравнение $f(x)=y$ для фиксированного $y\in[f(a),f(b)]$ имеет единственное решение $x=g(y)$. Существование решения следует из теоремы о промежуточном значении, а единственность --- из монотонности функции $f(x)$.
+\item {\bf Монотонность}. Пусть $ y_0<y_1$ и $x_0=g(y_0),\ x_1=g(y_1)$. Тогда $f(x_0)=y_0$ и $f(x_1)=y_1$. Учитывая, что $f(x)$ строго возрастает и $y_0<y_1$, получаем, что $x_0<x_1$. Следовательно, $g(y_0)<g(y_1)$, то есть $g(y)$ также строго возрастает.
+\item {\bf Непрерывность}. Докажем непрерывность $g(y)$ в точке $y_0$. Возьмем произвольное $\varepsilon>0$. Пусть 
+$$g(y_0)=x_0, \quad y_1=f(x_0-\varepsilon),\quad y_2=f(x_0+\varepsilon).$$
+Выбирая $\delta= \min(y_0-y_1,y_2-y_0)$, получаем, что
+$$
+|y-y_0|<\delta \quad\Rightarrow\quad y_1<y<y_2 \quad\Rightarrow\quad
+g(y_1)<g(y)<g(y_2) \quad\Rightarrow\quad x_0-\varepsilon<g(y)<x_0+\varepsilon.
+$$
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Теоремы Вейерштрасса}
+\begin{block}{Первая теорема Вейерштрасса}
+Функция $f(x)$, непрерывная на отрезке $[a,b]$, является ограниченной на этом отрезке:
+$$\exists C>0:\ \forall x\in[a,b] \quad |f(x)|<C.$$
+\end{block}
+\begin{block}{Вторая теорема Вейерштрасса}
+Функция $f(x)$, непрерывная на отрезке $[a,b]$, достигает на этом отрезке своего наибольшего и наименьшего значения:
+$$\exists x_{1,2}\in[a,b]:\quad f(x_1)=\inf_{x\in[a,b]}f(x),\quad f(x_2)=\sup_{x\in[a,b]}f(x).$$
+\end{block}
+\begin{block}{Замечание}
+Условие непрерывности функции $f(x)$ на отрезке существенно для данных теорем. Рассмотрите пример $f(x)=1/x$ на интервале $(0,1)$.
+\end{block}
+\end{frame}
+
+%Добавить равномерную непрерывность и теорему Кантора
+
+\end{document}
