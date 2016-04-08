@@ -184,7 +184,7 @@ n^2=2 k^2  \ \Rightarrow\
 \text{$n^2$ делится на 2} \ \Rightarrow\
 \text{$n$ делится на 2}.
 $$
-Получили, что $n$ и $m$ оба делятся на 2. Это противоречит тому, что $n/m$ --- несократимая дробь.
+Получили, что числа $n$ и $m$ оба делятся на 2. Это противоречит тому, что $n/m$ --- несократимая дробь.
 \end{block}
 \end{frame}
 
@@ -266,7 +266,8 @@ $$A=\left\{ q\in\mathbb{Q} \mid q>0,\ q^2<2 \right\},\quad B=\left\{ q\in\mathbb
 \item Отрезок $[a,b]=\{ x\in \mathbb{R} \mid a \le x \le b\}$.
 \item Конечный интервал $(a,b)=\{ x\in \mathbb{R} \mid a < x < b\}$.
 \item Конечный полуинтервал $(a,b]=\{ x\in \mathbb{R} \mid a < x \le b\}$, или аналогично $[a,b)$.
-\item Окрестность $O(a)$ точки $a$ --- это произвольный интервал, содержащий точку $a$.
+\item Окрестность точки $a$ --- это произвольный интервал, содержащий точку $a$:
+$$U \text{--- окрестность точки $a$}\quad \Rightarrow \quad \exists \alpha,\ \betta\in\mathbb{R}:\quad U=(\alpha,\betta),\ a\in U.$$
 \item $\delta$-окрестность точки $a$ --- это интервал $O_\delta(a)=(a-\delta, a+\delta)$.
 \item Проколотая $\delta$-окрестность точки $a$ --- это $\delta$-окрестность точки $a$ без самой точки $a$:
 $$\dot O_\delta(a)=(a-\delta,a) \cup (a, a+\delta).$$
@@ -275,8 +276,8 @@ $$\dot O_\delta(a)=(a-\delta,a) \cup (a, a+\delta).$$
 Иногда при обозначении интервалов уместно использовать символ $+\infty$ и $-\infty$. Например:
 
 $$x\in (-\infty , a] \quad \Leftrightarrow \quad x\le a,$$
-\vskip1em
 $$(-\infty, +\infty) = \mathbb{R}$$
+Окрестностями $+\infty$ и $-\infty$ называют интервалы вида $(\alha,+\infty)$ и $(-\infty,\betta)$ соответственно.
 \end{frame}
 
 \begin{frame}{Ограниченные множества}
@@ -351,7 +352,7 @@ $$z=\inf A= \inf_{a\in A} a.$$
 $$\sup A = +\infty.$$
 Если множество $A$ неограниченно снизу, то пишут
 $$\inf A = -\infty.$$
-\vskip-1em
+Для пустого множества принемают $\inf\emptyset = +\infty$, $\sum\emptyset = -\infty$.
 
 \begin{block}{Упражнение}
 Чему равен $\displaystyle \sup_{|x|<1} x$ ? Как это строго обосновать?
